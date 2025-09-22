@@ -1,0 +1,15 @@
+RewriteEngine On
+RewriteBase /app-tueni/public/
+
+# Si no existe archivo o carpeta, redirige al index
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Web pública
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+
+# Admin (panel)
+RewriteCond %{REQUEST_URI} ^/app-tueni/public/admin
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^admin/(.*)$ admin.php?url=$1 [QSA,L]
