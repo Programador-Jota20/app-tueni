@@ -7,6 +7,7 @@ class Config {
     const BASE_URL      = "http://localhost/app-tueni/public/";
     const APP_NAME      = "Tueni";
     const APP_AUTHOR    = "Adrians Eguizabal";
+    const APP_VERSIO    = "1.0.1";
 
     // DB
     const DB_HOST       = 'localhost';

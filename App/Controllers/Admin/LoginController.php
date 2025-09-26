@@ -19,8 +19,8 @@ class LoginController
         $user = Usuario::FindByUsername($username);
 
         if ($user && password_verify($password, $user['Password'])) {
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['usuario'];
+            $_SESSION['user_id'] = $user['CodUsuario'];
+            $_SESSION['username'] = $user['NomUsuario'];
             header("Location: /app-tueni/public/admin/dashboard");
             exit;
         } else {

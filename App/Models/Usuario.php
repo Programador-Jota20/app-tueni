@@ -20,31 +20,19 @@ class Usuario
     public static function FindByUsername($username)
     {
         $db = self::GetConnection();
-        $stmt = $db->prepare("SELECT id, usuario, password AS Password, correo, telefono, id_rol, FlgEli 
-                              FROM users WHERE usuario = :username LIMIT 1");
+        $stmt = $db->prepare("SELECT CodUsuario, NomUsuario, Password AS Password, Correo, Telefono, CodRol, FlgEli 
+                              FROM users WHERE NomUsuario = :username LIMIT 1");
         $stmt->execute([':username' => $username]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public static function SetRememberToken($id, $token, $expiresAt)
+    public static function MostrarUsuarios($username)
     {
         $db = self::GetConnection();
-        $stmt = $db->prepare("UPDATE users SET remember_token = :token, remember_expires = :exp WHERE id = :id");
-        $stmt->execute([':token'=>$token, ':exp'=>$expiresAt, ':id'=>$id]);
-    }
-
-    public static function FindByRememberToken($token)
-    {
-        $db = self::GetConnection();
-        $stmt = $db->prepare("SELECT * FROM users WHERE remember_token = :token AND remember_expires > NOW() LIMIT 1");
-        $stmt->execute([':token'=>$token]);
+        $stmt = $db->prepare("SELECT CodUsuario, NomUsuario, Correo, Telefono, CodRol, FlgEli 
+                              FROM users WHERE NomUsuario = :username LIMIT 1");
+        $stmt->execute([':username' => $username]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-
-    public static function ClearRememberToken($token)
-    {
-        $db = self::GetConnection();
-        $stmt = $db->prepare("UPDATE users SET remember_token = NULL, remember_expires = NULL WHERE remember_token = :token");
-        $stmt->execute([':token'=>$token]);
-    }
+    
 }

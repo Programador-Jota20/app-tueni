@@ -13,3 +13,6 @@ function app() {
 function autor() {
     return Config::APP_AUTHOR;
 }
+function version() {
+    return Config::APP_VERSIO;
+}
